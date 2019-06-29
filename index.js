@@ -7,18 +7,18 @@ module.exports = {
   included(app) {
     this._super.included.apply(this, arguments);
 
-    let options = app.options['ember-swagger-ui'] || {};
+    let options = this.options['ember-swagger-ui'] || {};
 
     if (options.usePublic) {
-      let uglify = app.options['ember-cli-uglify'] = app.options['ember-cli-uglify'] || {};
+      let uglify = this.options['ember-cli-uglify'] = this.options['ember-cli-uglify'] || {};
       uglify.exclude = (uglify.exclude || []).concat('swagger-ui-dist/**');
     } else {
-      app.import('node_modules/swagger-ui-dist/swagger-ui.css');
-      app.import('node_modules/swagger-ui-dist/swagger-ui-bundle.js');
-      app.import('node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js');
+      this.import('node_modules/swagger-ui-dist/swagger-ui.css');
+      this.import('node_modules/swagger-ui-dist/swagger-ui-bundle.js');
+      this.import('node_modules/swagger-ui-dist/swagger-ui-standalone-preset.js');
     }
 
-    app.import('vendor/shims/swagger-ui.js');
+    this.import('vendor/shims/swagger-ui.js');
 
     this._options = options;
   },
